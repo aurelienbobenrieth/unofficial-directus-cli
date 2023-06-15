@@ -2,17 +2,29 @@
   "name": "unofficial-directus-cli",
   "version": "0.1.0",
   "description": "An alternative to the official Directus CLI",
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.js",
   "repository": "https://github.com/aurelienbobenrieth/unofficial-directus-cli",
-  "author": "Aurelien BOBENRIETH",
+  "author": "Aurelien BOBENRIETH <aurelien@quasar.work>",
   "license": "MIT",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "unofficial-directus-cli": "./dist/index.js",
+    "directus-cli": "./dist/index.js"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc --project ./tsconfig.json"
   },
   "dependencies": {
     "chalk": "4.1.2",
     "commander": "^10.0.1",
-    "directus-sdk": "https://github.com/fabian-hiller/directus-sdk/raw/main/directus-sdk-0.1.0.tgz"
+    "directus-sdk": "https://github.com/fabian-hiller/directus-sdk/raw/main/directus-sdk-0.1.0-alpha.3.tgz"
   },
   "devDependencies": {
     "@types/node": "^20.3.1"
