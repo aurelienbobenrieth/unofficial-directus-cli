@@ -39,9 +39,9 @@ commander@^10.0.1:
   resolved "https://registry.yarnpkg.com/commander/-/commander-10.0.1.tgz#881ee46b4f77d1c1dccc5823433aa39b022cbe06"
   integrity sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==
 
-"directus-sdk@https://github.com/fabian-hiller/directus-sdk/raw/main/directus-sdk-0.1.0.tgz":
-  version "0.1.0"
-  resolved "https://github.com/fabian-hiller/directus-sdk/raw/main/directus-sdk-0.1.0.tgz#7508d81479f122b065280037d3ad9c95233772ec"
+"directus-sdk@https://github.com/fabian-hiller/directus-sdk/raw/main/directus-sdk-0.1.0-alpha.3.tgz":
+  version "0.1.0-alpha.3"
+  resolved "https://github.com/fabian-hiller/directus-sdk/raw/main/directus-sdk-0.1.0-alpha.3.tgz#419b26ad1510ea984e74cc043daccf12caa2eecc"
 
 has-flag@^4.0.0:
   version "4.0.0"
