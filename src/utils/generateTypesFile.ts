@@ -57,7 +57,9 @@ async function prepareCollections({ adminClient }: any) {
     if (manyField) {
       manyField.relation = {
         type: 'one',
-        collection: relation.meta?.one_collection,
+        collection:
+          relation.meta?.one_collection ??
+          relation.meta?.one_allowed_collections,
       };
     }
   });
@@ -69,11 +71,24 @@ function getFieldType(field: any) {
   if (field?.schema?.is_primary_key) return 'ItemKey';
 
   if (field.relation) {
-    return `${
-      field.relation.collection
-        ? `Relation<${toPascalCase(field.relation.collection)}>`
-        : 'any'
-    }${field.relation.type === 'many' ? '[]' : ''}`;
+    if (typeof field.relation.collection === 'string') {
+      return `${`Relation<${toPascalCase(field.relation.collection)}>`}${
+        field.relation.type === 'many' ? '[]' : ''
+      }`;
+    }
+
+    if (Array.isArray(field.relation.collection)) {
+      return field.relation.collection
+        .map(
+          (collection: string) =>
+            `Relation<${toPascalCase(collection)}>${
+              field.relation.type === 'many' ? '[]' : ''
+            }`
+        )
+        .join(' | ');
+    }
+
+    return 'any';
   }
 
   if (['integer', 'bigInteger', 'float', 'decimal'].includes(field.type))
@@ -89,7 +104,7 @@ function getFieldType(field: any) {
 }
 
 async function generateTypes({ sdkPath, collectionName, collections }: any) {
-  let typesTemplate = `import type {\n Item,\n Relation,\n ItemKey,\n DirectusUserItem,\n DirectusFileItem,\n Json,\n } from '${sdkPath}';\n\n`;
+  let typesTemplate = `import type {\n  Item,\n  Relation,\n  ItemKey,\n  Json,\n} from '${sdkPath}';\n\n`;
 
   const collectionTypes: string[] = [];
 
